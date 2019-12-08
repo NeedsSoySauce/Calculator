@@ -22,7 +22,7 @@ function operate(a, b, operator) {
             return subtract(a, b);
         case "*":
             return multiply(a, b);
-        case "\\":
+        case "/":
             return divide(a, b);
     }
 }
