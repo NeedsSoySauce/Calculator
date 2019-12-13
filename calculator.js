@@ -27,6 +27,16 @@ function operate(a, b, operator) {
     }
 }
 
+function parseEquation(equation) {
+    let parsed = equation.map(value => {
+        if (!isNaN(value)) {
+            return Number.parseFloat(value);
+        }
+        return value;
+    })
+    return parsed;
+}
+
 const inputDisplay = document.querySelector(".input-display");
 const resultDisplay = document.querySelector(".result-display");
 
@@ -73,7 +83,8 @@ buttonContainer.addEventListener("click", ({ target }) => {
         equation = []
 
     } else if (target === equalsButton) {
-        console.log("Calculate")
+        let parsed = parseEquation(equation);
+        console.log(parsed);
 
     } else if (target === pointButton) {
         let lastElement = equation[equation.length - 1];
