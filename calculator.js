@@ -116,6 +116,7 @@ let result = null;
 const buttonContainer = document.querySelector(".button-container");
 buttonContainer.addEventListener("click", ({ target }) => {
     let char = target.innerText;
+    let lastElement = equation[equation.length - 1];
 
     if (target === clearButton) {
         equation = []
@@ -126,8 +127,6 @@ buttonContainer.addEventListener("click", ({ target }) => {
         result = evalulateEquation(parsed);
 
     } else if (target === pointButton) {
-        let lastElement = equation[equation.length - 1];
-
         // We don't add a point if the last element ends in a point
         if (isNaN(lastElement)) {
             equation.push("0" + char);
@@ -135,11 +134,15 @@ buttonContainer.addEventListener("click", ({ target }) => {
             equation[equation.length - 1] += char;
         }
 
-    } else if (numberButtons.includes(target) && !isNaN(equation[equation.length - 1])) {
+    } else if (numberButtons.includes(target) && !isNaN(lastElement)) {
+        // If a number was pressed and the last element was a number
         equation[equation.length - 1] += char;
 
+    } else if (operatorButtons.includes(target) && lastElement in operator) {
+        // If an operator was pressed and the last element was an operator
+        equation[equation.length - 1] = char;
     } else {
-        equation.push(char)
+        equation.push(char);
     }
 
     if (equation.length !== 0) {
