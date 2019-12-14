@@ -37,8 +37,36 @@ function parseEquation(equation) {
     return parsed;
 }
 
+function evalulateEquation(equation) {
+    let temp = [...equation];
+
+    order.forEach(symbols => {
+
+        let i = 1;
+        while (i < temp.length) {
+            let symbol = temp[i];
+            let a = temp[i - 1];
+            let b = temp[i + 1];
+
+            if (symbols.includes(symbol)) {
+                let value = operator[symbol](a, b);
+                console.log("i", i);
+                console.log("L", ...temp.slice(0, i - 1));
+                console.log("R", ...temp.slice(i + 2));
+                temp = [...temp.slice(0, i - 1), value, ...temp.slice(i + 2)];
+                continue;
+            }
+            i++;
+        }
+
+    })
+
+    return temp[0];
+
+}
+
 const inputDisplay = document.querySelector(".input-display");
-const resultDisplay = document.querySelector(".result-display");
+const tempDisplay = document.querySelector(".temp-display");
 
 // Calculator buttons
 const clearButton = document.querySelector(".clear");
@@ -73,6 +101,15 @@ const operatorButtons = [
     addButton, subtractButton, multiplyButton, divideButton
 ]
 
+const order = [["*", "/"], ["+", "-"]];
+
+const operator = {
+    "+": add,
+    "-": subtract,
+    "*": multiply,
+    "/": divide
+}
+
 let equation = [];
 
 const buttonContainer = document.querySelector(".button-container");
@@ -84,7 +121,8 @@ buttonContainer.addEventListener("click", ({ target }) => {
 
     } else if (target === equalsButton) {
         let parsed = parseEquation(equation);
-        console.log(parsed);
+        let result = evalulateEquation(parsed);
+        console.log(result);
 
     } else if (target === pointButton) {
         let lastElement = equation[equation.length - 1];
