@@ -65,8 +65,8 @@ function evalulateEquation(equation) {
 
 }
 
-const inputDisplay = document.querySelector(".input-display");
-const tempDisplay = document.querySelector(".temp-display");
+const equationDisplay = document.querySelector(".equation-display");
+const resultDisplay = document.querySelector(".result-display");
 
 // Calculator buttons
 const clearButton = document.querySelector(".clear");
@@ -111,6 +111,7 @@ const operator = {
 }
 
 let equation = [];
+let result = null;
 
 const buttonContainer = document.querySelector(".button-container");
 buttonContainer.addEventListener("click", ({ target }) => {
@@ -118,11 +119,11 @@ buttonContainer.addEventListener("click", ({ target }) => {
 
     if (target === clearButton) {
         equation = []
+        result = null;
 
     } else if (target === equalsButton) {
         let parsed = parseEquation(equation);
-        let result = evalulateEquation(parsed);
-        console.log(result);
+        result = evalulateEquation(parsed);
 
     } else if (target === pointButton) {
         let lastElement = equation[equation.length - 1];
@@ -140,4 +141,17 @@ buttonContainer.addEventListener("click", ({ target }) => {
     } else {
         equation.push(char)
     }
+
+    if (equation.length !== 0) {
+        equationDisplay.innerText = equation.join(" ") + " =";
+    } else {
+        equationDisplay.innerText = "";
+    }
+
+    if (result) {
+        resultDisplay.innerText = "" + result;
+    } else {
+        resultDisplay.innerText = "";
+    }
+
 })
