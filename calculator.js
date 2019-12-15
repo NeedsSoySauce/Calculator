@@ -112,6 +112,7 @@ const operator = {
 
 let equation = [];
 let result = 0;
+let resultCalculated = false;
 
 const buttonContainer = document.querySelector(".button-container");
 buttonContainer.addEventListener("click", ({ target }) => {
@@ -121,10 +122,12 @@ buttonContainer.addEventListener("click", ({ target }) => {
     if (target === clearButton) {
         equation = []
         result = 0;
+        resultCalculated = false;
 
     } else if (target === equalsButton) {
         let parsed = parseEquation(equation);
         result = evalulateEquation(parsed);
+        resultCalculated = true;
 
     } else if (target === pointButton) {
         // We don't add a point if the last element ends in a point
@@ -135,14 +138,17 @@ buttonContainer.addEventListener("click", ({ target }) => {
         }
 
     } else if (numberButtons.includes(target)) {
-        if (!isNaN(lastElement)) {
+        if (resultCalculated) {
+            // If the result of a calculation is currently being stored
+            // start a new equation
+            equation = [char];
+        } else if (!isNaN(lastElement)) {
             // If a number was pressed and the last element was a number
             // append this number to it
             equation[equation.length - 1] += char;
         } else {
             equation.push(char);
         }
-
 
     } else if (operatorButtons.includes(target)) {
         if (lastElement in operator) {
@@ -152,11 +158,16 @@ buttonContainer.addEventListener("click", ({ target }) => {
         } else if (equation.length === 0) {
             // If this operator is the first element being added, append a "0" before it
             equation.push("0", char);
+        } else if (resultCalculated) {
+            // If the result of a calculation is currently being stored
+            // start a new equation with the result as the first operand
+            equation = [result, char];
         } else {
             equation.push(char)
         }
+
     } else {
-        equation.push(char)
+        console.log("Unhandled button: ", target);
     }
 
     if (equation.length !== 0) {
