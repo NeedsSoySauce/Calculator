@@ -27,6 +27,14 @@ function operate(a, b, operator) {
     }
 }
 
+function isEquationValid(equation) {
+    let lastElement = equation[equation.length - 1];
+    if (lastElement in operator) {
+        return false;
+    }
+    return true;
+}
+
 function parseEquation(equation) {
     let parsed = equation.map(value => {
         if (!isNaN(value)) {
@@ -125,9 +133,11 @@ buttonContainer.addEventListener("click", ({ target }) => {
         resultCalculated = false;
 
     } else if (target === equalsButton) {
-        let parsed = parseEquation(equation);
-        result = evalulateEquation(parsed);
-        resultCalculated = true;
+        if (isEquationValid(equation)) {
+            let parsed = parseEquation(equation);
+            result = evalulateEquation(parsed);
+            resultCalculated = true;
+        }
 
     } else if (target === pointButton) {
         // We don't add a point if the last element ends in a point
@@ -162,6 +172,7 @@ buttonContainer.addEventListener("click", ({ target }) => {
             // If the result of a calculation is currently being stored
             // start a new equation with the result as the first operand
             equation = [result, char];
+            resultCalculated = false;
         } else {
             equation.push(char)
         }
