@@ -111,7 +111,7 @@ const operator = {
 }
 
 let equation = [];
-let result = null;
+let result = 0;
 
 const buttonContainer = document.querySelector(".button-container");
 buttonContainer.addEventListener("click", ({ target }) => {
@@ -120,7 +120,7 @@ buttonContainer.addEventListener("click", ({ target }) => {
 
     if (target === clearButton) {
         equation = []
-        result = null;
+        result = 0;
 
     } else if (target === equalsButton) {
         let parsed = parseEquation(equation);
@@ -134,27 +134,37 @@ buttonContainer.addEventListener("click", ({ target }) => {
             equation[equation.length - 1] += char;
         }
 
-    } else if (numberButtons.includes(target) && !isNaN(lastElement)) {
-        // If a number was pressed and the last element was a number
-        equation[equation.length - 1] += char;
+    } else if (numberButtons.includes(target)) {
+        if (!isNaN(lastElement)) {
+            // If a number was pressed and the last element was a number
+            // append this number to it
+            equation[equation.length - 1] += char;
+        } else {
+            equation.push(char);
+        }
 
-    } else if (operatorButtons.includes(target) && lastElement in operator) {
-        // If an operator was pressed and the last element was an operator
-        equation[equation.length - 1] = char;
+
+    } else if (operatorButtons.includes(target)) {
+        if (lastElement in operator) {
+            // If an operator was pressed and the last element was an operator
+            // replace the last operator
+            equation[equation.length - 1] = char;
+        } else if (equation.length === 0) {
+            // If this operator is the first element being added, append a "0" before it
+            equation.push("0", char);
+        } else {
+            equation.push(char)
+        }
     } else {
-        equation.push(char);
+        equation.push(char)
     }
 
     if (equation.length !== 0) {
-        equationDisplay.innerText = equation.join(" ") + " =";
+        equationDisplay.innerText = equation.join(" ");
     } else {
         equationDisplay.innerText = "";
     }
 
-    if (result) {
-        resultDisplay.innerText = "" + result;
-    } else {
-        resultDisplay.innerText = "";
-    }
+    resultDisplay.innerText = "" + result;
 
 })
