@@ -1,0 +1,55 @@
+html *
+{
+   font-family: monospace;
+}
+
+html, body {
+    height: 100vh;
+    margin: 0;
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.calculator-container {
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+}
+
+.display-container {
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    align-items: flex-end;
+}
+
+.equation-display {
+    font-size: 12px;
+    flex-basis: 1.5em;
+}
+
+.result-display {
+    font-size: 22px;
+    flex-basis: 1.2em;
+    text-overflow: ellipsis;
+}
+
+.button-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.button-row {
+    display: flex;
+}
+
+.calculator-button {
+    flex: 1 0 0;
+    padding: 12px;
+    margin: 1px;
+}
