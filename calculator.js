@@ -150,8 +150,9 @@ buttonContainer.addEventListener("click", ({ target }) => {
             equation = ["0" + char];
             resultCalculated = false;
         } else if (isNaN(lastElement)) {
+            // If the last element was an operator, start a new operand
             equation.push("0" + char);
-        } else if (lastElement.charAt(lastElement.length - 1) !== char) {
+        } else if (!lastElement.includes(char)) {
             equation[equation.length - 1] += char;
         }
 
