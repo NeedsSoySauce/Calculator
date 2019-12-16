@@ -136,6 +136,7 @@ buttonContainer.addEventListener("click", ({ target }) => {
         if (isEquationValid(equation)) {
             let parsed = parseEquation(equation);
             result = evalulateEquation(parsed);
+            equation.push(char)
             resultCalculated = true;
         }
 
@@ -152,6 +153,7 @@ buttonContainer.addEventListener("click", ({ target }) => {
             // If the result of a calculation is currently being stored
             // start a new equation
             equation = [char];
+            resultCalculated = false;
         } else if (!isNaN(lastElement)) {
             // If a number was pressed and the last element was a number
             // append this number to it
