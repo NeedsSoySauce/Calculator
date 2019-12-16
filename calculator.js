@@ -78,6 +78,7 @@ const resultDisplay = document.querySelector(".result-display");
 
 // Calculator buttons
 const clearButton = document.querySelector(".clear");
+const deleteButton = document.querySelector(".clear-entry");
 
 const sevenButton = document.querySelector(".seven");
 const eightButton = document.querySelector(".eight");
@@ -132,7 +133,14 @@ buttonContainer.addEventListener("click", ({ target }) => {
         result = 0;
         resultCalculated = false;
 
-    } else if (target === equalsButton) {
+    } else if (target === deleteButton) {
+        if (resultCalculated) {
+            equation = [];
+        } else {
+            equation.pop();
+        }
+
+    }else if (target === equalsButton) {
         if (isEquationValid(equation)) {
             if (resultCalculated) {
                 // Repeat the last operation on the current result
