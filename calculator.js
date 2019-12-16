@@ -145,7 +145,11 @@ buttonContainer.addEventListener("click", ({ target }) => {
 
     } else if (target === pointButton) {
         // We don't add a point if the last element ends in a point
-        if (isNaN(lastElement)) {
+        if (resultCalculated) {
+            // Start a new equation
+            equation = ["0" + char];
+            resultCalculated = false;
+        } else if (isNaN(lastElement)) {
             equation.push("0" + char);
         } else if (lastElement.charAt(lastElement.length - 1) !== char) {
             equation[equation.length - 1] += char;
