@@ -134,8 +134,11 @@ buttonContainer.addEventListener("click", ({ target }) => {
 
     } else if (target === equalsButton) {
         if (isEquationValid(equation)) {
-            let parsed = parseEquation(equation);
-            result = evalulateEquation(parsed);
+            if (resultCalculated) {
+                // Repeat the last operation on the current result
+                equation = [result, ...equation.slice(equation.length - 3, equation.length - 1)]
+            }
+            result = evalulateEquation(parseEquation(equation));
             equation.push(char)
             resultCalculated = true;
         }
