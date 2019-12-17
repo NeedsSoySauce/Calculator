@@ -50,9 +50,9 @@ function evalulateEquation(equation) {
 
             if (symbols.includes(symbol)) {
                 let value = operator[symbol](a, b);
-                console.log("i", i);
-                console.log("L", ...temp.slice(0, i - 1));
-                console.log("R", ...temp.slice(i + 2));
+                // console.log("i", i);
+                // console.log("L", ...temp.slice(0, i - 1));
+                // console.log("R", ...temp.slice(i + 2));
                 temp = [...temp.slice(0, i - 1), value, ...temp.slice(i + 2)];
                 continue;
             }
@@ -66,12 +66,6 @@ function evalulateEquation(equation) {
 }
 
 function updateDisplay() {
-
-    let lastElement = equation[equation.length - 1];
-    if (lastElement !== undefined && lastElement.charAt(lastElement.length - 1) === ".") {
-        equation[equation.length - 1] = lastElement.slice(0, lastElement.length - 1);
-    }
-
     if (equation.length !== 0) {
         equationDisplay.innerText = equation.join(" ");
     } else {
@@ -82,6 +76,13 @@ function updateDisplay() {
 }
 
 function handleClick(event) {
+
+    if (result === "Undefined") {
+        equation = [];
+        result = 0;
+        resultCalculated = false;
+    }
+
     let { target } = event;
     let char = target.innerText;
     let lastElement = equation[equation.length - 1];
@@ -102,18 +103,28 @@ function handleClick(event) {
         }
 
     } else if (target === equalsButton) {
+
+        // Remove trailing decimal points
+        if (lastElement !== undefined && lastElement.charAt(lastElement.length - 1) === ".") {
+            equation[equation.length - 1] = lastElement.slice(0, lastElement.length - 1);
+        }
+
         if (equation.length === 0) {
             equation = ["0"];
         } else if (lastElement in operator) {
             // Duplicate the last operand
             let lastOperand = equation[equation.length - 2];
             equation.push(lastOperand);
+        } else if (equation.join(" ").includes("0 / 0")) {
+            // 0 divided by 0 is undefined
+            result = "Undefined";
+            return;
         } else if (resultCalculated) {
             // Repeat the last operation on the current result
             equation = [result, ...equation.slice(equation.length - 3, equation.length - 1)]
         }
 
-        result = evalulateEquation(parseEquation(equation));
+        result = "" + evalulateEquation(parseEquation(equation));
         equation.push(char)
         resultCalculated = true;
 
@@ -132,15 +143,18 @@ function handleClick(event) {
 
     } else if (numberButtons.includes(target)) {
         if (resultCalculated) {
+            console.log("1")
             // If the result of a calculation is currently being stored
             // start a new equation
             equation = [char];
             resultCalculated = false;
         } else if (!isNaN(lastElement)) {
+            console.log("2")
             // If a number was pressed and the last element was a number
             // append this number to it
             equation[equation.length - 1] += char;
         } else {
+            console.log("3")
             equation.push(char);
         }
 
@@ -153,7 +167,6 @@ function handleClick(event) {
             // before pushing this operator
             equation[equation.length - 1] = lastElement.slice(0, lastElement.length - 1);
             equation.push(char);
-
         } else if (lastElement in operator) {
             // If an operator was pressed and the last element was an operator
             // replace the last operator
