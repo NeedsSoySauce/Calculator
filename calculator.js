@@ -78,7 +78,7 @@ const resultDisplay = document.querySelector(".result-display");
 
 // Calculator buttons
 const clearButton = document.querySelector(".clear");
-const deleteButton = document.querySelector(".clear-entry");
+const clearEntryButton = document.querySelector(".clear-entry");
 
 const sevenButton = document.querySelector(".seven");
 const eightButton = document.querySelector(".eight");
@@ -133,14 +133,17 @@ buttonContainer.addEventListener("click", ({ target }) => {
         result = 0;
         resultCalculated = false;
 
-    } else if (target === deleteButton) {
+    } else if (target === clearEntryButton) {
         if (resultCalculated) {
             equation = [];
         } else {
-            equation.pop();
+            let lastElement = equation.pop();
+            if (lastElement.length > 1) {
+                equation.push(lastElement.slice(0, lastElement.length - 1));
+            }
         }
 
-    }else if (target === equalsButton) {
+    } else if (target === equalsButton) {
         if (isEquationValid(equation)) {
             if (resultCalculated) {
                 // Repeat the last operation on the current result
@@ -152,7 +155,6 @@ buttonContainer.addEventListener("click", ({ target }) => {
         }
 
     } else if (target === pointButton) {
-        // We don't add a point if the last element ends in a point
         if (resultCalculated) {
             // Start a new equation
             equation = ["0" + char];
@@ -161,6 +163,7 @@ buttonContainer.addEventListener("click", ({ target }) => {
             // If the last element was an operator, start a new operand
             equation.push("0" + char);
         } else if (!lastElement.includes(char)) {
+            // We don't add a point if the last element ends in a point
             equation[equation.length - 1] += char;
         }
 
