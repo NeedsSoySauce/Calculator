@@ -138,7 +138,7 @@ buttonContainer.addEventListener("click", ({ target }) => {
             equation = [];
         } else {
             let lastElement = equation.pop();
-            if (lastElement.length > 1) {
+            if (lastElement !== undefined && lastElement.length > 1) {
                 equation.push(lastElement.slice(0, lastElement.length - 1));
             }
         }
