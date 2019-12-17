@@ -115,7 +115,7 @@ function handleClick(event) {
             // Duplicate the last operand
             let lastOperand = equation[equation.length - 2];
             equation.push(lastOperand);
-        } else if (equation.join(" ").includes("0 / 0")) {
+        } else if ((" " + equation.join(" ") + " ").includes(" 0 / 0 ")) {
             // 0 divided by 0 is undefined
             result = "Undefined";
             return;
