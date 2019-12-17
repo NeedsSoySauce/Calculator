@@ -29,7 +29,7 @@ function operate(a, b, operator) {
 
 function isEquationValid(equation) {
     let lastElement = equation[equation.length - 1];
-    if (lastElement in operator) {
+    if (lastElement in operator || equation.length === 0) {
         return false;
     }
     return true;
