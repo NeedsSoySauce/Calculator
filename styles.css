@@ -1,10 +1,14 @@
+html {
+    background-color: #e0e0e0;
+}
+
 html *
 {
    font-family: monospace;
 }
 
-html, body {
-    height: 100vh;
+body {
+    height: 60vh;
     margin: 0;
 }
 
@@ -52,4 +56,21 @@ html, body {
     flex: 1 0 0;
     padding: 12px;
     margin: 1px;
+    border: 0;
+    background-color: #bdbdbd6c;
+    outline: none;
 }
+
+.calculator-button:hover {
+    background-color: #bdbdbd;
+}
+
+.numpad-button {
+    background-color: #c4c4c4;
+}
+
+.equals {
+    background-color: #7986cb;
+}
+
+
