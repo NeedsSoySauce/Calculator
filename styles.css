@@ -72,9 +72,7 @@ body {
     outline: none;
 }
 
-.calculator-button:hover {
-    background-color: #bdbdbd;
-}
+
 
 .numpad-button {
     background-color: #c4c4c4;
@@ -84,19 +82,25 @@ body {
     background-color: #7986cb;
 }
 
-.equals:hover {
-    background-color: #6f7eca;
-}
-
 @media screen and (min-width: 600px) {
     .center {
         height: 60%;
     }
-    
+
     .calculator-container {
         flex: none;
         width: 300px;
         height: 375px;
+    }
+}
+
+@media screen and (pointer: fine) {
+    .calculator-button:hover {
+        background-color: #bdbdbd;
+    }
+    
+    .equals:hover {
+        background-color: #6f7eca;
     }
 }
 
