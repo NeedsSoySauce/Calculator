@@ -1,4 +1,5 @@
 function add(a, b) {
+    console.log(a + b)
     return a + b;
 }
 
@@ -147,18 +148,15 @@ function handleClick(event) {
 
     } else if (numberButtons.includes(target)) {
         if (resultCalculated) {
-            console.log("1")
             // If the result of a calculation is currently being stored
             // start a new equation
             equation = [char];
             resultCalculated = false;
         } else if (!isNaN(lastElement)) {
-            console.log("2")
             // If a number was pressed and the last element was a number
             // append this number to it
             equation[equation.length - 1] += char;
         } else {
-            console.log("3")
             equation.push(char);
         }
 
