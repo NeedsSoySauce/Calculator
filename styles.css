@@ -5,10 +5,11 @@ html {
 html *
 {
    font-family: monospace;
+   box-sizing: border-box;
 }
 
 body {
-    height: 60vh;
+    height: 100vh;
     margin: 0;
 }
 
@@ -22,14 +23,17 @@ body {
 .calculator-container {
     display: flex;
     flex-direction: column;
-    width: 200px;
+    flex: 1;
+    padding: 8px;
+    height: 100%;
 }
 
 .display-container {
     display: flex;
     flex-direction: column;
-    justify-items: center;
+    justify-content: center;
     align-items: flex-end;
+    flex: 1;
 }
 
 .equation-display {
@@ -46,10 +50,12 @@ body {
 .button-container {
     display: flex;
     flex-direction: column;
+    flex: 1;
 }
 
 .button-row {
     display: flex;
+    flex: 1;
 }
 
 .calculator-button {
@@ -71,6 +77,10 @@ body {
 
 .equals {
     background-color: #7986cb;
+}
+
+.equals:hover {
+    background-color: #6f7eca;
 }
 
 
