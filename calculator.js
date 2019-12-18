@@ -72,6 +72,10 @@ function updateDisplay() {
         equationDisplay.innerText = "";
     }
 
+    if (!isNaN(result)) {
+        result = +parseFloat(result).toFixed(20);
+    }
+
     resultDisplay.innerText = "" + result;
 }
 
@@ -233,7 +237,7 @@ const operator = {
 }
 
 let equation = [];
-let result = 0;
+let result = "0";
 let resultCalculated = false;
 
 const buttonContainer = document.querySelector(".button-container");
