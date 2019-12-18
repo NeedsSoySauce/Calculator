@@ -39,12 +39,17 @@ body {
 .equation-display {
     font-size: 12px;
     flex-basis: 1.5em;
+    text-align: end;
+    word-break: break-all;
+    width: 100%;
 }
 
 .result-display {
     font-size: 22px;
     flex-basis: 1.2em;
-    text-overflow: ellipsis;
+    text-align: end;
+    word-break: break-all;
+    width: 100%;
 }
 
 .button-container {
