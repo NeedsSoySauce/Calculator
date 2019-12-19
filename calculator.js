@@ -188,7 +188,7 @@ function handleClick(event) {
 
 }
 
-document.addEventListener("keypress", event => {
+document.addEventListener("keydown", event => {
     const key = event.key;
     if (key in hotkey) {
         hotkey[key].click();
