@@ -188,6 +188,13 @@ function handleClick(event) {
 
 }
 
+document.addEventListener("keypress", event => {
+    const key = event.key;
+    if (key in hotkey) {
+        hotkey[key].click();
+    }
+})
+
 const equationDisplay = document.querySelector(".equation-display");
 const resultDisplay = document.querySelector(".result-display");
 
@@ -232,6 +239,27 @@ const operator = {
     "-": subtract,
     "*": multiply,
     "/": divide
+}
+
+const hotkey = {
+    ".": pointButton,
+    "0": zeroButton,
+    "1": oneButton,
+    "2": twoButton,
+    "3": threeButton,
+    "4": fourButton,
+    "5": fiveButton,
+    "6": sixButton,
+    "7": sevenButton,
+    "8": eightButton,
+    "9": nineButton,
+    "Enter": equalsButton,
+    "=": equalsButton,
+    "Backspace": clearEntryButton,
+    "/": divideButton,
+    "*": multiplyButton,
+    "-": subtractButton,
+    "+": addButton
 }
 
 let equation = [];
