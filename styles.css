@@ -82,6 +82,14 @@ body {
     background-color: #7986cb;
 }
 
+.calculator-button:active {
+    background-color: #bdbdbd;
+}
+
+.equals:active {
+    background-color: #6f7eca;
+}
+
 @media screen and (min-width: 600px) {
     .center {
         height: 60%;
